@@ -3,8 +3,8 @@ using UnityEngine;
 public class LABALAScript : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField] private float velocidad = 5f;
-    [SerializeField] private int direccion = 1;
+    [SerializeField] private float velocidad;
+    [SerializeField] private int direccion;
     void Start()
     {
         

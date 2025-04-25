@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject Spawn1;
     [SerializeField] private GameObject Spawn2;
     private bool isShooting = false;
+    private int vida = 100;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -55,6 +56,20 @@ public class PlayerScript : MonoBehaviour
         else if (context.canceled)
         {
             isShooting = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("EnemyShoot") || collision.CompareTag("Enemy"))
+        {
+            vida -= 20;
+            Destroy(collision);
+            if(vida <= 0)
+            {
+                print("muelto");
+                Destroy(this.gameObject);
+            }
         }
     }
 }
