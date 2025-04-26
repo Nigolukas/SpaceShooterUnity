@@ -30,7 +30,8 @@ public class EnemyScript : MonoBehaviour
 
     IEnumerator Disparos()
     {
-        for(int i = 0; i<2; i++)
+        int disp =  Random.Range(1, 3);
+        for(int i = 0; i<disp; i++)
         {
             Instantiate(BalaPrefab, Spawn.transform.position, Quaternion.identity);
             yield return new WaitForSeconds(0.25f);
@@ -38,11 +39,17 @@ public class EnemyScript : MonoBehaviour
         
     }
 
+    public void ActualizarScore()
+    {
+        PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 10);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerShoot"))
         {
             Destroy(collision.gameObject);
+            ActualizarScore();
             Destroy(this.gameObject);
         }
     }
