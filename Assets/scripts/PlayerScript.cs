@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject Spawn1;
     [SerializeField] private GameObject Spawn2;
     [SerializeField] private GameObject panelMuerte;
+    [SerializeField] private TextMeshProUGUI scoreText;
     private bool isShooting = false;
     private int vida = 100;
     public UnityEngine.UI.Image VidaUI;
@@ -37,6 +39,7 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         timer += 1 * Time.deltaTime;
+        scoreText.text = PlayerPrefs.GetInt("Score").ToString();
         if (isShooting && timer > delayShoot)
         {
             Instantiate(BalaPrefab, Spawn1.transform.position, Quaternion.identity);
