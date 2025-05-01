@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,5 +27,15 @@ public class Reiniciar : MonoBehaviour
     public void StartGame(string scene)
     {
         SceneManager.LoadScene(scene);
+    }
+
+    public void ExitGame()
+    {
+        Debug.Log("Saliendo del juego...");
+        #if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }

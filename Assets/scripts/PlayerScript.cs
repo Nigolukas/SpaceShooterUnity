@@ -109,7 +109,7 @@ public class PlayerScript : MonoBehaviour
         {
             vida -= 20;
             ActualizarVida();
-            Destroy(collision);
+            Destroy(collision.gameObject);
             if(vida <= 0)
             {
                 print("muelto");
