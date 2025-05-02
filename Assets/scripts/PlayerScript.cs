@@ -17,16 +17,17 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private GameObject Spawn1;
     [SerializeField] private GameObject Spawn2;
     [SerializeField] private GameObject panelMuerte;
+    [SerializeField] private GameObject panelPausa;
     [SerializeField] private TextMeshProUGUI scoreText;
     private bool isShooting = false;
     private int vida = 100;
     public UnityEngine.UI.Image VidaUI;
-    public Sprite Barra100;
-    public Sprite Barra80;
-    public Sprite Barra60;
-    public Sprite Barra40;
-    public Sprite Barra20;
-    public Sprite Barra0;
+    [SerializeField] private Sprite Barra100;
+    [SerializeField] private Sprite Barra80;
+    [SerializeField] private Sprite Barra60;
+    [SerializeField] private Sprite Barra40;
+    [SerializeField] private Sprite Barra20;
+    [SerializeField] private Sprite Barra0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -100,6 +101,28 @@ public class PlayerScript : MonoBehaviour
         else if (context.canceled)
         {
             isShooting = false;
+        }
+    }
+
+    public void PauseInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Pausa();
+        }
+    }
+
+    public void Pausa()
+    {
+        if (panelPausa.activeSelf == false)
+        {
+            Time.timeScale = 0;
+            panelPausa.SetActive(true);
+        }
+        else if (panelPausa.activeSelf == true)
+        {
+            Time.timeScale = 1;
+            panelPausa.SetActive(false);
         }
     }
 

@@ -20,13 +20,16 @@ public class Reiniciar : MonoBehaviour
 
     public void RestartScene()
     {
+        Time.timeScale = 1;
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }
 
     public void StartGame(string scene)
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(scene);
+        
     }
 
     public void ExitGame()

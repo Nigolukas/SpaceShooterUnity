@@ -22,49 +22,34 @@ public class Seleccionar_Boton : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (EventSystem.current.currentSelectedGameObject == null)
         {
             EventSystem.current.SetSelectedGameObject(botonPorDefecto);
         }
-        Activau();
     }
 
-    public void Activau()
+    public void GuardarUI(InputAction.CallbackContext context)
     {
-        var gamepad = Gamepad.current;
-        var keyboard = Keyboard.current;
-
-        if ((gamepad != null && gamepad.leftStick.ReadValue() != Vector2.zero))
+        if (context.started)
         {
-            if( InterfazControl != null && InterfazTeclado != null)
+            var dispositivo = context.control.device;
+
+            if (dispositivo is Gamepad)
             {
                 InterfazControl.SetActive(true);
                 InterfazTeclado.SetActive(false);
+                PlayerPrefs.SetString("UI", "Control");
             }
-            
-            PlayerPrefs.SetString("UI", "Control");
-
-        }
-        if (keyboard != null && (
-            keyboard.upArrowKey.isPressed ||
-            keyboard.downArrowKey.isPressed ||
-            keyboard.leftArrowKey.isPressed ||
-            keyboard.rightArrowKey.isPressed ||
-            keyboard.wKey.isPressed ||
-            keyboard.aKey.isPressed ||
-            keyboard.sKey.isPressed ||
-            keyboard.dKey.isPressed))
-        {
-            if (InterfazControl != null && InterfazTeclado != null)
+            else if (dispositivo is Keyboard)
             {
                 InterfazControl.SetActive(false);
                 InterfazTeclado.SetActive(true);
+                PlayerPrefs.SetString("UI", "Teclado");
             }
             
-            PlayerPrefs.SetString("UI", "Teclado");
         }
-
     }
+
 }
