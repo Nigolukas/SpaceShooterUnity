@@ -8,7 +8,7 @@ public class LABALAScript : MonoBehaviour
     private float inclinacion = 0f;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -34,4 +34,12 @@ public class LABALAScript : MonoBehaviour
     {
         inclinacion = inclinao;
     }
+
+    public void SpeedUp()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        sr.color = Color.red;
+        velocidad = velocidad*2;
+    }
+
 }

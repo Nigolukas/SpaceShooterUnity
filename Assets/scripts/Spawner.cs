@@ -7,9 +7,11 @@ public class Spawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private GameObject EnemmyPrefab;
     [SerializeField] private GameObject EnemmyPrefab2;
+    [SerializeField] private GameObject PowerUp;
     [SerializeField] private TextMeshProUGUI LevelText;
     private int nivelAnterior = 1;
     private int nivel = 1;
+    private float timer = 0;
     void Start()
     {
         print("nivel" + nivel);
@@ -27,6 +29,15 @@ public class Spawner : MonoBehaviour
             StartCoroutine(ShowLevel());
             StartCoroutine(NormalLevel());
             
+        }
+        timer = timer + Time.deltaTime;
+        if(timer > 15 )
+        {
+            float posAleX = Random.Range(-8.26f, 8.26f);
+            float posAleY = Random.Range(-4.5f, 4.5f);
+            
+            Instantiate(PowerUp, new Vector3(posAleX,posAleY,0), Quaternion.identity);
+            timer = 0;
         }
 
     }

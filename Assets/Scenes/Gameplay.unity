@@ -2339,6 +2339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemmyPrefab: {fileID: 3251105810007396945, guid: 91527b49dc2d8ec4d92f3ad2781fbeb6, type: 3}
   EnemmyPrefab2: {fileID: 3251105810007396945, guid: 848428223418cad4a8683bf24a32531f, type: 3}
+  PowerUp: {fileID: 2469738642525333688, guid: 6f070430451c75946b09a665c92d02c0, type: 3}
   LevelText: {fileID: 1219101504}
 --- !u!1 &729123281
 GameObject:

@@ -32,7 +32,7 @@ public class Seleccionar_Boton : MonoBehaviour
 
     public void GuardarUI(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
         {
             var dispositivo = context.control.device;
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -28,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] private Sprite Barra40;
     [SerializeField] private Sprite Barra20;
     [SerializeField] private Sprite Barra0;
+    private bool power = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -43,8 +45,14 @@ public class PlayerScript : MonoBehaviour
         scoreText.text = PlayerPrefs.GetInt("Score").ToString();
         if (isShooting && timer > delayShoot)
         {
-            Instantiate(BalaPrefab, Spawn1.transform.position, Quaternion.identity);
-            Instantiate(BalaPrefab, Spawn2.transform.position, Quaternion.identity);
+            GameObject bala1 =  Instantiate(BalaPrefab, Spawn1.transform.position, Quaternion.identity);
+            GameObject bala2 = Instantiate(BalaPrefab, Spawn2.transform.position, Quaternion.identity);
+            LABALAScript bala1S = bala1.GetComponent<LABALAScript>();
+            LABALAScript bala2S = bala2.GetComponent<LABALAScript>();
+            if (power)
+            {
+                bala1S.SpeedUp(); bala2S.SpeedUp();
+            }
             print("shooted xd");
             timer = 0;
         }
@@ -140,5 +148,19 @@ public class PlayerScript : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+        if (collision.CompareTag("PowerUp"))
+        {
+            StartCoroutine(PowerUp());
+            Destroy(collision.gameObject);
+        }
+    }
+
+    IEnumerator PowerUp()
+    {
+        delayShoot = delayShoot / 2;
+        power = true;
+        yield return new WaitForSeconds(8f);
+        delayShoot = delayShoot * 2;
+        power = false;
     }
 }
